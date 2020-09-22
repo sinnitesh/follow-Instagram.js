@@ -51,17 +51,16 @@ const followEveryone = async () => {
 		countFollower++
     }
     console.log(`You cannot follow anymore. You have completed assigned follower ${countFollower}`)
-	
-	
-	const everyhour=setInterval(function(){ 
-    
-    followEveryone();
-	//testfun();
-	iterationnumber++;
-	
-}, 900000);
 	if(iterationnumber>=NUMBER_OF_EXECUTION)
 		 clearInterval(everyhour);
+	
+const everyhour=setInterval(function(){ 
+    
+    followEveryone();
+    iterationnumber++;
+	
+}, 900000);
+	
 }
 
 followEveryone()
