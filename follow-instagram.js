@@ -9,8 +9,9 @@
 
 const FOLLOW_BUTTON_TEXT = 'Follow' // CHANGE THIS TO YOUR LANGUAGE
 const MAX_ATTEMPTS_PER_FOLLOW = 3 // BUMP THIS IF YOU HAVE WOODEN PC
-const MAX_FOLLOWERS_PER_RUN = 5 // Number of accounts to be followed
-
+const MAX_FOLLOWERS_PER_RUN = 18 // Number of accounts to be followed
+const NUMBER_OF_EXECUTION = 5 // Number of iterations 
+let iterationnumber=0;
 const followSomebody = () => {
     const followButton = document
         .evaluate(`//button[text()="${FOLLOW_BUTTON_TEXT}"]`, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
@@ -39,16 +40,33 @@ const randomTimeout = () => (Math.floor((Math.random() * 10) + 1) * 1000) + 2000
 
 const followEveryone = async () => {
 	let countFollower=0
-    let shouldStop = false
+    //let shouldStop = false
+	
 	while (countFollower<MAX_FOLLOWERS_PER_RUN) {
     //while (!shouldStop) {
         shouldStop = followSomebody()
         const followTimeout = randomTimeout()
-        console.log(`Waiting ${followTimeout} seconds. Should stop: ${shouldStop}.`)
+        console.log(`Waiting ${followTimeout} seconds. Follower Count: ${countFollower}.`)
         await timeout(followTimeout)
 		countFollower++
     }
     console.log(`You cannot follow anymore. You have completed assigned follower ${countFollower}`)
+	
+	
+	const everyhour=setInterval(function(){ 
+    
+    followEveryone();
+	//testfun();
+	iterationnumber++;
+	
+}, 900000);
+	if(iterationnumber>=NUMBER_OF_EXECUTION)
+		 clearInterval(everyhour);
 }
 
 followEveryone()
+
+
+
+
+
